@@ -2,8 +2,6 @@ import fetch from 'node-fetch';
 import fs from 'fs';
 
 const subdomain = process.env.KINTONE_SUBDOMAIN;
-const username = process.env.KINTONE_USERNAME;
-const password = process.env.KINTONE_PASSWORD;
 
 type Apis = {
   [api: string]: {
