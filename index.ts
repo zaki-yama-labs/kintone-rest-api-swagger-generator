@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import fs from 'fs';
+import prettier from 'prettier';
 
 const subdomain = process.env.KINTONE_SUBDOMAIN;
 
@@ -17,7 +18,6 @@ type Api = {
   schemas: object;
 }
 
-
 (async () => {
   const baseUrl = `https://${subdomain}.cybozu.com/k/v1`;
 
@@ -31,8 +31,5 @@ type Api = {
 
   const schemas = await Promise.all(fetchSchemasPromises);
 
-  console.log('----------------------');
-  console.log(schemas);
-
-  fs.writeFileSync('schemas.json', JSON.stringify(schemas));
+  fs.writeFileSync('schemas.json', prettier.format(JSON.stringify(schemas), { parser: 'json' }));
 })();
