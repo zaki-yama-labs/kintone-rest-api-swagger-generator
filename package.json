@@ -17,6 +17,7 @@
     "@babel/preset-typescript": "^7.7.4",
     "@cybozu/eslint-config": "^8.1.0",
     "@types/jest": "^24.0.23",
+    "@types/js-yaml": "^3.12.1",
     "@types/node": "^12.12.6",
     "@types/node-fetch": "^2.5.3",
     "@types/prettier": "^1.19.0",
@@ -28,6 +29,7 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
+    "js-yaml": "^3.13.1",
     "node-fetch": "^2.6.0"
   }
 }
