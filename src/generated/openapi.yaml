@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   title: Kintone REST API
 paths:
-  /app/acl/get:
+  /app/acl.json:
     get:
       parameters:
         - in: query

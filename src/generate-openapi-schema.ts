@@ -23,7 +23,12 @@ export function generateOpenAPISchema() {
       description: "Kintone REST API",
       version: "1.0.0",
       title: "Kintone REST API"
-    }
+    },
+    servers: [
+      {
+        url: `https://${process.env.KINTONE_SUBDOMAIN}.cybozu.com/k/v1/`
+      }
+    ]
   };
   const paths = generatePaths(kintoneAPISchemas);
   // console.dir(paths, { depth: 100 });
@@ -32,7 +37,22 @@ export function generateOpenAPISchema() {
   // @ts-ignore
   json.paths = paths;
   // @ts-ignore
-  json.components = components;
+  json.components = {
+    securitySchemes: {
+      ApiTokenAuth: {
+        type: "apiKey",
+        in: "header",
+        name: "X-Cybozu-API-Token"
+      }
+    },
+    ...components
+  };
+  // @ts-ignore
+  json.security = [
+    {
+      ApiTokenAuth: []
+    }
+  ];
 
   fs.writeFileSync(
     path.resolve(__dirname, "generated", "openapi.yaml"),
@@ -43,7 +63,7 @@ export function generateOpenAPISchema() {
 function generatePaths(kintoneAPISchemas: any[]) {
   const paths: any = {};
   kintoneAPISchemas.forEach(schema => {
-    const key = `/${schema.id}`;
+    const key = `/${schema.path}`;
     // console.log(key);
     paths[key] = {
       [schema.httpMethod.toLowerCase()]: {
