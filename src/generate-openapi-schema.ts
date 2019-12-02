@@ -3,13 +3,12 @@ import path from "path";
 import prettier from "prettier";
 
 export function generateOpenAPISchema() {
-  const kintoneAPISchema = JSON.parse(
+  const kintoneAPISchemas = JSON.parse(
     fs.readFileSync(
       path.resolve(__dirname, "generated", "kintone-api-schemas.json"),
       "utf8"
     ),
     (key, value) => {
-      console.log(key);
       if (key === "$ref") {
         return `#/components/schemas/${value}`;
       }
@@ -25,9 +24,9 @@ export function generateOpenAPISchema() {
       title: "Kintone REST API"
     }
   };
-  const paths = generatePaths(kintoneAPISchema);
+  const paths = generatePaths(kintoneAPISchemas);
   console.dir(paths, { depth: 100 });
-  const components = generateComponents(kintoneAPISchema);
+  const components = generateComponents(kintoneAPISchemas);
   console.dir(components, { depth: 100 });
   // @ts-ignore
   json.paths = paths;
@@ -39,30 +38,37 @@ export function generateOpenAPISchema() {
   );
 }
 
-function generatePaths(kintoneAPISchema: any) {
-  const key = `/${kintoneAPISchema.id}`;
-  console.log(kintoneAPISchema.id);
-  return {
-    [key]: {
-      [kintoneAPISchema.httpMethod.toLowerCase()]: {
+function generatePaths(kintoneAPISchemas: any[]) {
+  const paths: any = {};
+  kintoneAPISchemas.forEach(schema => {
+    const key = `/${schema.id}`;
+    console.log(key);
+    paths[key] = {
+      [schema.httpMethod.toLowerCase()]: {
         responses: {
           "200": {
             description: "OK",
             content: {
               "application/json": {
-                schema: kintoneAPISchema.response
+                schema: schema.response
               }
             }
           }
         }
       }
-    }
-  };
+    };
+  });
+  return paths;
 }
 
-function generateComponents(kintoneAPISchema: any) {
-  return {
-    schemas: kintoneAPISchema.schemas
-  };
+function generateComponents(kintoneAPISchemas: any) {
+  let schemas = {};
+  kintoneAPISchemas.forEach((schema: any) => {
+    schemas = {
+      ...schema.schemas,
+      ...schemas
+    };
+  });
+  return { schemas };
 }
 generateOpenAPISchema();

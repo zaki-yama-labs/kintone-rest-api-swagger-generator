@@ -19,9 +19,9 @@ const subdomain = process.env.KINTONE_SUBDOMAIN;
   //
   // const schemas = await Promise.all(fetchSchemasPromises);
 
-  const schemas = await (
-    await fetch(`${baseUrl}/apis/app/acl/get.json`)
-  ).json();
+  const schemas = [
+    await (await fetch(`${baseUrl}/apis/app/acl/get.json`)).json()
+  ];
   fs.writeFileSync(
     path.resolve(__dirname, "generated", "kintone-api-schemas.json"),
     prettier.format(JSON.stringify(schemas), { parser: "json" })
