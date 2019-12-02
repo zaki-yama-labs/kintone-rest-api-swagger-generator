@@ -26,9 +26,9 @@ export function generateOpenAPISchema() {
     }
   };
   const paths = generatePaths(kintoneAPISchemas);
-  console.dir(paths, { depth: 100 });
+  // console.dir(paths, { depth: 100 });
   const components = generateComponents(kintoneAPISchemas);
-  console.dir(components, { depth: 100 });
+  // console.dir(components, { depth: 100 });
   // @ts-ignore
   json.paths = paths;
   // @ts-ignore
@@ -44,7 +44,7 @@ function generatePaths(kintoneAPISchemas: any[]) {
   const paths: any = {};
   kintoneAPISchemas.forEach(schema => {
     const key = `/${schema.id}`;
-    console.log(key);
+    // console.log(key);
     paths[key] = {
       [schema.httpMethod.toLowerCase()]: {
         parameters: convertRequestToParameters(schema.request),

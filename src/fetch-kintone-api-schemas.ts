@@ -5,7 +5,7 @@ import prettier from "prettier";
 
 const subdomain = process.env.KINTONE_SUBDOMAIN;
 
-(async () => {
+export async function fetchKintoneAPISchemas() {
   const baseUrl = `https://${subdomain}.cybozu.com/k/v1`;
 
   // TODO: fetch all of kintone REST apis
@@ -26,4 +26,4 @@ const subdomain = process.env.KINTONE_SUBDOMAIN;
     path.resolve(__dirname, "generated", "kintone-api-schemas.json"),
     prettier.format(JSON.stringify(schemas), { parser: "json" })
   );
-})();
+}
