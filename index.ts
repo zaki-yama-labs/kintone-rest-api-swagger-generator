@@ -1,10 +1,11 @@
+import ora from "ora";
+
 import { fetchKintoneAPISchemas } from "./src/fetch-kintone-api-schemas";
 import { generateOpenAPISchema } from "./src/generate-openapi-schema";
 
-console.log("Fetching kintone REST API Schemas...");
+const spinner = ora("Fetching kintone REST API Schemas...").start();
 fetchKintoneAPISchemas();
-console.log("Done.");
 
-console.log("Generating OpenAPI Schema file...");
+spinner.text = "Generating OpenAPI Schema file...";
 generateOpenAPISchema();
-console.log("Done.");
+spinner.succeed("Successfully generated src/generated/openapi.yaml");
