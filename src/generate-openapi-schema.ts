@@ -72,4 +72,5 @@ function generateComponents(kintoneAPISchemas: any) {
   });
   return { schemas };
 }
+
 generateOpenAPISchema();
