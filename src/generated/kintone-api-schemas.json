@@ -1,0 +1,43 @@
+{
+  "id": "app/acl/get",
+  "baseUrl": "https://zaki-yama.cybozu.com/k/v1/",
+  "path": "app/acl.json",
+  "httpMethod": "GET",
+  "request": {
+    "properties": { "app": { "format": "long", "type": "string" } },
+    "required": ["app"],
+    "type": "object"
+  },
+  "response": {
+    "properties": {
+      "rights": { "items": { "$ref": "Right" }, "type": "array" },
+      "revision": { "format": "long", "type": "string" }
+    },
+    "type": "object"
+  },
+  "schemas": {
+    "Right": {
+      "properties": {
+        "recordImportable": { "type": "boolean" },
+        "appEditable": { "type": "boolean" },
+        "recordExportable": { "type": "boolean" },
+        "recordAddable": { "type": "boolean" },
+        "recordViewable": { "type": "boolean" },
+        "recordEditable": { "type": "boolean" },
+        "includeSubs": { "type": "boolean" },
+        "recordDeletable": { "type": "boolean" },
+        "entity": {
+          "properties": {
+            "code": { "type": "string" },
+            "type": {
+              "enum": ["USER", "ORGANIZATION", "GROUP", "CREATOR"],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  }
+}
