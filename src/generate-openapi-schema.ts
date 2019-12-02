@@ -7,7 +7,14 @@ export function generateOpenAPISchema() {
     fs.readFileSync(
       path.resolve(__dirname, "generated", "kintone-api-schemas.json"),
       "utf8"
-    )
+    ),
+    (key, value) => {
+      console.log(key);
+      if (key === "$ref") {
+        return `#/components/schemas/${value}`;
+      }
+      return value;
+    }
   );
 
   const json = {

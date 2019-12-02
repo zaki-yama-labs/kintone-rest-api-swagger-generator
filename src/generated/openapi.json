@@ -15,7 +15,10 @@
               "application/json": {
                 "schema": {
                   "properties": {
-                    "rights": { "items": { "$ref": "Right" }, "type": "array" },
+                    "rights": {
+                      "items": { "$ref": "#/components/schemas/Right" },
+                      "type": "array"
+                    },
                     "revision": { "format": "long", "type": "string" }
                   },
                   "type": "object"
