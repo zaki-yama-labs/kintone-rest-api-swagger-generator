@@ -28,7 +28,6 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
-    "handlebars": "^4.5.3",
     "node-fetch": "^2.6.0"
   }
 }
