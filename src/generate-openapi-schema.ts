@@ -63,7 +63,7 @@ export function generateOpenAPISchema() {
 function generatePaths(kintoneAPISchemas: any[]) {
   const paths: any = {};
   kintoneAPISchemas.forEach(schema => {
-    const key = `/${schema.id}`;
+    const key = `/${schema.id}.json`;
     // console.log(key);
     paths[key] = {
       [schema.httpMethod.toLowerCase()]: {
