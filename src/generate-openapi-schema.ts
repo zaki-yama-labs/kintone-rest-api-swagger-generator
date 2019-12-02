@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import prettier from "prettier";
+import yaml from "js-yaml";
 
 export function generateOpenAPISchema() {
   const kintoneAPISchemas = JSON.parse(
@@ -32,9 +32,10 @@ export function generateOpenAPISchema() {
   json.paths = paths;
   // @ts-ignore
   json.components = components;
+
   fs.writeFileSync(
-    path.resolve(__dirname, "generated", "openapi.json"),
-    prettier.format(JSON.stringify(json), { parser: "json" })
+    path.resolve(__dirname, "generated", "openapi.yaml"),
+    yaml.safeDump(json)
   );
 }
 
