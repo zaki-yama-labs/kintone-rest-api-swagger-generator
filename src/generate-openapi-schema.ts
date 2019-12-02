@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import yaml from "js-yaml";
+import { convertRequestToParameters } from "./request-converter";
 
 export function generateOpenAPISchema() {
   const kintoneAPISchemas = JSON.parse(
@@ -46,6 +47,7 @@ function generatePaths(kintoneAPISchemas: any[]) {
     console.log(key);
     paths[key] = {
       [schema.httpMethod.toLowerCase()]: {
+        parameters: convertRequestToParameters(schema.request),
         responses: {
           "200": {
             description: "OK",

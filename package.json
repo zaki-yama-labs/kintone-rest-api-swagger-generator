@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "generate": "ts-node index.ts",
+    "generate:kintone-api": "ts-node src/fetch-kintone-api-schemas.ts",
+    "generate:open-api": "ts-node src/generate-openapi-schema.ts",
     "lint": "eslint src/**/*.ts",
     "doc": "ts-node src/doc-server.ts",
     "mock": "prism mock src/generated/openapi.yaml",
