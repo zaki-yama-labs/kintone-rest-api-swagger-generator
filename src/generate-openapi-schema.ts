@@ -37,7 +37,22 @@ export function generateOpenAPISchema() {
   // @ts-ignore
   json.paths = paths;
   // @ts-ignore
-  json.components = components;
+  json.components = {
+    securitySchemes: {
+      ApiTokenAuth: {
+        type: "apiKey",
+        in: "header",
+        name: "X-Cybozu-API-Token"
+      }
+    },
+    ...components
+  };
+  // @ts-ignore
+  json.security = [
+    {
+      ApiTokenAuth: []
+    }
+  ];
 
   fs.writeFileSync(
     path.resolve(__dirname, "generated", "openapi.yaml"),
