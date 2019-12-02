@@ -6,6 +6,7 @@
   "scripts": {
     "generate": "ts-node index.ts",
     "lint": "eslint src/**/*.ts",
+    "mock": "prism mock src/generated/openapi.yaml",
     "test": "jest"
   },
   "keywords": [],
@@ -29,6 +30,7 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
+    "@stoplight/prism-cli": "^3.2.1",
     "js-yaml": "^3.13.1",
     "node-fetch": "^2.6.0"
   }
