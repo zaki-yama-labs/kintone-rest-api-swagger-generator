@@ -6,6 +6,12 @@ info:
 paths:
   /app/acl/get:
     get:
+      parameters:
+        - in: query
+          name: app
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: OK
