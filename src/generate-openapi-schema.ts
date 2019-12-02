@@ -23,7 +23,12 @@ export function generateOpenAPISchema() {
       description: "Kintone REST API",
       version: "1.0.0",
       title: "Kintone REST API"
-    }
+    },
+    servers: [
+      {
+        url: `https://${process.env.KINTONE_SUBDOMAIN}.cybozu.com/k/v1/`
+      }
+    ]
   };
   const paths = generatePaths(kintoneAPISchemas);
   // console.dir(paths, { depth: 100 });
