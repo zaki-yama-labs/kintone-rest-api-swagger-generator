@@ -11,7 +11,7 @@ const spec = fs.readFileSync(
 const doc = jsyaml.safeLoad(spec);
 const app = express();
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(doc));
+app.use("/", swaggerUi.serve, swaggerUi.setup(doc));
 
 app.listen(3000, () => {
   console.log("Listen on port 3000");

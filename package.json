@@ -6,6 +6,7 @@
   "scripts": {
     "generate": "ts-node index.ts",
     "lint": "eslint src/**/*.ts",
+    "doc": "ts-node src/doc-server.ts",
     "mock": "prism mock src/generated/openapi.yaml",
     "test": "jest"
   },
